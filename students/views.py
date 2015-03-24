@@ -1,8 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 # Create your views here.
 
+
+# importing models
+
+from students.models import Profile
+
+
 def index(request):
-    return HttpResponse("Hello dear")
+    students_list = Profile.objects.order_by('id')
+    context = {
+        'students_list': students_list
+    }
+    return render(request, 'students/index.html', context)
+
+
+def single(request, student_id):
+    profile = get_object_or_404(Profile, pk=student_id)
+    return render(request, 'students/profile.html', {'profile': profile})
+
+
+def result(request, student_id):
+    return "Something"

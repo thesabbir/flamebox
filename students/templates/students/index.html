@@ -1,0 +1,9 @@
+{% if students_list %}
+<ul>
+    {% for student in students_list %}
+    <li><a href="{% url 'students:single' student.id %}">{{ student.user_name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No student are available.</p>
+{% endif %}
