@@ -9,8 +9,11 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50)
     roll = models.IntegerField()
 
+    def get_full_name(self):
+        return self.first_name + " " + self.last_name
+
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.user_name
 
 
 class Result(models.Model):
@@ -19,4 +22,4 @@ class Result(models.Model):
     result = models.IntegerField()
 
     def __str__(self):
-        return self.student
+        return self.student.get_full_name()
